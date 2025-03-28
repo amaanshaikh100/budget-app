@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import Button from "./Button";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-function ExpenseForm({ setIsOpen }) {
+function ExpenseForm({ setIsOpen, onHandleExpense }) {
   const [expense, setExpense] = useState(100);
   const [category, setCategory] = useState("Entertainment");
   const [note, setNote] = useState("");
@@ -24,7 +24,7 @@ function ExpenseForm({ setIsOpen }) {
       date,
     };
 
-    console.log(newExpense);
+    onHandleExpense(newExpense);
 
     setIsOpen((prev) => !prev);
   }
@@ -88,6 +88,8 @@ function ExpenseForm({ setIsOpen }) {
           <textarea
             className="border border-slate-400 w-[100%] h-24 rounded-md resize-none outline-none p-2"
             placeholder="Add a note here..."
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
           />
         </div>
 

@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "./Button";
 import { IoAddCircleOutline, IoWalletOutline } from "react-icons/io5";
 
-function IncomeForm({ setIsOpen }) {
+function IncomeForm({ setIsOpen, onHandleIncome }) {
   const [income, setIncome] = useState(500);
   const [category, setCategory] = useState("Salary");
   const [note, setNote] = useState("");
@@ -13,14 +13,18 @@ function IncomeForm({ setIsOpen }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    const id = Math.floor(Math.random() * 10000)
+      .toString()
+      .padStart(4, "0");
     const newIncome = {
+      id,
       income,
       category,
       note,
       date,
     };
 
-    console.log(newIncome);
+    onHandleIncome(newIncome);
 
     setIncome(100);
     setCategory("Salary");

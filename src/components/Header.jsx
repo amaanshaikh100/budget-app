@@ -9,18 +9,22 @@ import Modal from "./Modal";
 import { IoWalletOutline } from "react-icons/io5";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 
-function Header() {
+function Header({ onHandleIncome, onHandleExpense }) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
   function handleIncomeModal() {
     setIsOpen((prev) => !prev);
-    setModalContent(<IncomeForm setIsOpen={setIsOpen} />);
+    setModalContent(
+      <IncomeForm onHandleIncome={onHandleIncome} setIsOpen={setIsOpen} />
+    );
   }
 
   function handleExpenseModal() {
     setIsOpen((prev) => !prev);
-    setModalContent(<ExpenseForm setIsOpen={setIsOpen} />);
+    setModalContent(
+      <ExpenseForm onHandleExpense={onHandleExpense} setIsOpen={setIsOpen} />
+    );
   }
 
   return (
