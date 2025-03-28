@@ -3,7 +3,7 @@ import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 
 function Cards() {
   return (
-    <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div className="mt-8 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 sm:gap-6">
       {/* card 1 */}
       <div className="bg-white p-4 flex items-center gap-2 rounded-md">
         <span className="bg-green-100 p-3 rounded-full">

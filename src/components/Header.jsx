@@ -1,34 +1,43 @@
-import { IoWalletOutline } from "react-icons/io5";
-import Button from "./Button";
-import Logo from "./Logo";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { useState } from "react";
+
+import Button from "./Button";
+import IncomeForm from "./IncomeForm";
+import ExpenseForm from "./ExpenseForm";
+import Logo from "./Logo";
+import Modal from "./Modal";
+
+import { IoWalletOutline } from "react-icons/io5";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
-  function handleIncome() {
+  function handleIncomeModal() {
     setIsOpen((prev) => !prev);
+    setModalContent(<IncomeForm setIsOpen={setIsOpen} />);
   }
 
-  function handleExpense() {
-    console.log("expense click");
+  function handleExpenseModal() {
+    setIsOpen((prev) => !prev);
+    setModalContent(<ExpenseForm setIsOpen={setIsOpen} />);
   }
 
   return (
-    <div className="flex justify-between">
+    <div className="flex flex-col gap-4 md:flex-row md:justify-between">
       <Logo />
 
       <div className="flex gap-2">
         <Button
-          onClick={handleIncome}
+          onClick={handleIncomeModal}
           type="income"
           icon={<FaRegMoneyBillAlt className="text-green-800" size={12} />}
         >
           Income
         </Button>
+
         <Button
-          onClick={handleExpense}
+          onClick={handleExpenseModal}
           type="expense"
           icon={<IoWalletOutline className="text-blue-800" size={12} />}
         >
@@ -37,12 +46,9 @@ function Header() {
       </div>
 
       {isOpen ? (
-        <div className="fixed w-[100%] mx-auto inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white w-[50%] h-[80vh] p-6 rounded-lg">
-            <h2>Add Income</h2>
-            <button onClick={() => setIsOpen((prev) => !prev)}>Close</button>
-          </div>
-        </div>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          {modalContent}
+        </Modal>
       ) : null}
     </div>
   );
